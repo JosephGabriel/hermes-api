@@ -1,6 +1,13 @@
 import { createServer, YogaInitialContext } from "@graphql-yoga/node";
+import { makeExecutableSchema } from "@graphql-tools/schema";
+
+import { typeDefs } from "./schema";
 
 interface Server extends YogaInitialContext {}
+
+const schema = makeExecutableSchema({
+  typeDefs,
+});
 
 const context = (ctx: Server) => {
   return ctx;
@@ -9,6 +16,7 @@ const context = (ctx: Server) => {
 export const startServer = async () => {
   const server = createServer<Server>({
     port: process.env.PORT,
+    schema,
     context,
   });
 
