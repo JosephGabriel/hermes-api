@@ -1,0 +1,13 @@
+overwrite: true
+watch: true
+schema: "src/**/*.graphql"
+generates:
+  src/generated/schema.ts:
+    config:
+      contextType: "../index#Server"
+    plugins:
+      - "typescript"
+      - "typescript-resolvers"
+  ./graphql.schema.json:
+    plugins:
+      - "introspection"

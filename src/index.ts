@@ -4,7 +4,7 @@ import { makeExecutableSchema } from "@graphql-tools/schema";
 import { typeDefs } from "./schemas";
 import { resolvers } from "./resolvers";
 
-interface Server extends YogaInitialContext {}
+export interface Server extends YogaInitialContext {}
 
 const schema = makeExecutableSchema({
   typeDefs,
