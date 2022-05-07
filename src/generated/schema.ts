@@ -14,9 +14,35 @@ export type Scalars = {
   Float: number;
 };
 
+export type Chat = {
+  __typename?: 'Chat';
+  id: Scalars['ID'];
+  image: Scalars['String'];
+  messages?: Maybe<Array<Message>>;
+  participants?: Maybe<Array<Scalars['String']>>;
+  title: Scalars['String'];
+};
+
+export type Message = {
+  __typename?: 'Message';
+  createdAt: Scalars['String'];
+  id: Scalars['ID'];
+  sender: User;
+  text: Scalars['String'];
+};
+
 export type Query = {
   __typename?: 'Query';
   hello?: Maybe<Scalars['String']>;
+};
+
+export type User = {
+  __typename?: 'User';
+  chats?: Maybe<Array<Chat>>;
+  id: Scalars['ID'];
+  image: Scalars['String'];
+  name: Scalars['String'];
+  phone: Scalars['String'];
 };
 
 
@@ -89,22 +115,59 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
 /** Mapping between all available schema types and the resolvers types */
 export type ResolversTypes = {
   Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
+  Chat: ResolverTypeWrapper<Chat>;
+  ID: ResolverTypeWrapper<Scalars['ID']>;
+  Message: ResolverTypeWrapper<Message>;
   Query: ResolverTypeWrapper<{}>;
   String: ResolverTypeWrapper<Scalars['String']>;
+  User: ResolverTypeWrapper<User>;
 };
 
 /** Mapping between all available schema types and the resolvers parents */
 export type ResolversParentTypes = {
   Boolean: Scalars['Boolean'];
+  Chat: Chat;
+  ID: Scalars['ID'];
+  Message: Message;
   Query: {};
   String: Scalars['String'];
+  User: User;
+};
+
+export type ChatResolvers<ContextType = Server, ParentType extends ResolversParentTypes['Chat'] = ResolversParentTypes['Chat']> = {
+  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  image?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  messages?: Resolver<Maybe<Array<ResolversTypes['Message']>>, ParentType, ContextType>;
+  participants?: Resolver<Maybe<Array<ResolversTypes['String']>>, ParentType, ContextType>;
+  title?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type MessageResolvers<ContextType = Server, ParentType extends ResolversParentTypes['Message'] = ResolversParentTypes['Message']> = {
+  createdAt?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  sender?: Resolver<ResolversTypes['User'], ParentType, ContextType>;
+  text?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type QueryResolvers<ContextType = Server, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
   hello?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
 };
 
+export type UserResolvers<ContextType = Server, ParentType extends ResolversParentTypes['User'] = ResolversParentTypes['User']> = {
+  chats?: Resolver<Maybe<Array<ResolversTypes['Chat']>>, ParentType, ContextType>;
+  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  image?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  phone?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
 export type Resolvers<ContextType = Server> = {
+  Chat?: ChatResolvers<ContextType>;
+  Message?: MessageResolvers<ContextType>;
   Query?: QueryResolvers<ContextType>;
+  User?: UserResolvers<ContextType>;
 };
 

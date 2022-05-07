@@ -1,3 +1,26 @@
 type Query {
   hello: String
 }
+
+type Chat {
+  id: ID!
+  title: String!
+  image: String!
+  participants: [String!]
+  messages: [Message!]
+}
+
+type Message {
+  id: ID!
+  sender: User!
+  text: String!
+  createdAt: String!
+}
+
+type User {
+  id: ID!
+  name: String!
+  phone: String!
+  image: String!
+  chats: [Chat!]
+}
