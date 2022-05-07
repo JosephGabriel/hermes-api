@@ -1,12 +1,14 @@
 import { createServer, YogaInitialContext } from "@graphql-yoga/node";
 import { makeExecutableSchema } from "@graphql-tools/schema";
 
-import { typeDefs } from "./schema";
+import { typeDefs } from "./schemas";
+import { resolvers } from "./resolvers";
 
 interface Server extends YogaInitialContext {}
 
 const schema = makeExecutableSchema({
   typeDefs,
+  resolvers,
 });
 
 const context = (ctx: Server) => {
