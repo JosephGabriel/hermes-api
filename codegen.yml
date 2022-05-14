@@ -5,6 +5,10 @@ generates:
   src/generated/schema.ts:
     config:
       contextType: "../index#Server"
+      mappers:
+        User: "/models/mappers.ts#UserMapper"
+        Chat: "/models/mappers.ts#ChatMapper"
+        Message: "/models/mappers.ts#MessageMapper"
     plugins:
       - "typescript"
       - "typescript-resolvers"

@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "NODE_ENV=development ts-node-dev --respawn --transpile-only src/server.ts",
-    "prestart": "yarn generate",
+    "prerestart": "yarn generate",
     "generate": "graphql-codegen --config codegen.yml"
   },
   "keywords": [],

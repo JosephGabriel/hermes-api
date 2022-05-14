@@ -1,7 +1,6 @@
-version: '3.1'
+version: "3.1"
 
 services:
-
   mongo:
     image: mongo
     restart: always
@@ -18,3 +17,4 @@ services:
       ME_CONFIG_MONGODB_ADMINUSERNAME: root
       ME_CONFIG_MONGODB_ADMINPASSWORD: password
       ME_CONFIG_MONGODB_URL: mongodb://root:password@mongo:27017/
+
