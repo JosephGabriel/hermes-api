@@ -1,17 +1,20 @@
 type Query {
   hello: String
+  users: [User!]
+  chats: [Chat!]
 }
 
 type Mutation {
   createChat(data: CreateChatInput): Chat!
+  createUser(data: CreateUserInput): User!
+  createMessage(data: CreateMessageInput): Message!
 }
 
 type Chat {
   id: ID!
-  title: String!
-  image: String!
-  participants: [String!]
+  participants: [User!]
   messages: [Message!]
+  createdAt: String!
 }
 
 type Message {
@@ -30,7 +33,17 @@ type User {
 }
 
 input CreateChatInput {
-  title: String!
   participants: [String!]!
+}
+
+input CreateUserInput {
+  name: String!
+  phone: String!
   image: String!
+}
+
+input CreateMessageInput {
+  sender: String!
+  text: String!
+  chat: String!
 }

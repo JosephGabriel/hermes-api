@@ -17,17 +17,26 @@ export type Scalars = {
 
 export type Chat = {
   __typename?: 'Chat';
+  createdAt: Scalars['String'];
   id: Scalars['ID'];
-  image: Scalars['String'];
   messages?: Maybe<Array<Message>>;
-  participants?: Maybe<Array<Scalars['String']>>;
-  title: Scalars['String'];
+  participants?: Maybe<Array<User>>;
 };
 
 export type CreateChatInput = {
-  image: Scalars['String'];
   participants: Array<Scalars['String']>;
-  title: Scalars['String'];
+};
+
+export type CreateMessageInput = {
+  chat: Scalars['String'];
+  sender: Scalars['String'];
+  text: Scalars['String'];
+};
+
+export type CreateUserInput = {
+  image: Scalars['String'];
+  name: Scalars['String'];
+  phone: Scalars['String'];
 };
 
 export type Message = {
@@ -41,6 +50,8 @@ export type Message = {
 export type Mutation = {
   __typename?: 'Mutation';
   createChat: Chat;
+  createMessage: Message;
+  createUser: User;
 };
 
 
@@ -48,9 +59,21 @@ export type MutationCreateChatArgs = {
   data?: InputMaybe<CreateChatInput>;
 };
 
+
+export type MutationCreateMessageArgs = {
+  data?: InputMaybe<CreateMessageInput>;
+};
+
+
+export type MutationCreateUserArgs = {
+  data?: InputMaybe<CreateUserInput>;
+};
+
 export type Query = {
   __typename?: 'Query';
+  chats?: Maybe<Array<Chat>>;
   hello?: Maybe<Scalars['String']>;
+  users?: Maybe<Array<User>>;
 };
 
 export type User = {
@@ -134,6 +157,8 @@ export type ResolversTypes = {
   Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
   Chat: ResolverTypeWrapper<ChatMapper>;
   CreateChatInput: CreateChatInput;
+  CreateMessageInput: CreateMessageInput;
+  CreateUserInput: CreateUserInput;
   ID: ResolverTypeWrapper<Scalars['ID']>;
   Message: ResolverTypeWrapper<MessageMapper>;
   Mutation: ResolverTypeWrapper<{}>;
@@ -147,6 +172,8 @@ export type ResolversParentTypes = {
   Boolean: Scalars['Boolean'];
   Chat: ChatMapper;
   CreateChatInput: CreateChatInput;
+  CreateMessageInput: CreateMessageInput;
+  CreateUserInput: CreateUserInput;
   ID: Scalars['ID'];
   Message: MessageMapper;
   Mutation: {};
@@ -156,11 +183,10 @@ export type ResolversParentTypes = {
 };
 
 export type ChatResolvers<ContextType = Server, ParentType extends ResolversParentTypes['Chat'] = ResolversParentTypes['Chat']> = {
+  createdAt?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-  image?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   messages?: Resolver<Maybe<Array<ResolversTypes['Message']>>, ParentType, ContextType>;
-  participants?: Resolver<Maybe<Array<ResolversTypes['String']>>, ParentType, ContextType>;
-  title?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  participants?: Resolver<Maybe<Array<ResolversTypes['User']>>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -174,10 +200,14 @@ export type MessageResolvers<ContextType = Server, ParentType extends ResolversP
 
 export type MutationResolvers<ContextType = Server, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = {
   createChat?: Resolver<ResolversTypes['Chat'], ParentType, ContextType, Partial<MutationCreateChatArgs>>;
+  createMessage?: Resolver<ResolversTypes['Message'], ParentType, ContextType, Partial<MutationCreateMessageArgs>>;
+  createUser?: Resolver<ResolversTypes['User'], ParentType, ContextType, Partial<MutationCreateUserArgs>>;
 };
 
 export type QueryResolvers<ContextType = Server, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
+  chats?: Resolver<Maybe<Array<ResolversTypes['Chat']>>, ParentType, ContextType>;
   hello?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  users?: Resolver<Maybe<Array<ResolversTypes['User']>>, ParentType, ContextType>;
 };
 
 export type UserResolvers<ContextType = Server, ParentType extends ResolversParentTypes['User'] = ResolversParentTypes['User']> = {

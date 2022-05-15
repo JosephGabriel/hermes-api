@@ -1,10 +1,22 @@
-import { createServer, YogaInitialContext } from "@graphql-yoga/node";
 import { makeExecutableSchema } from "@graphql-tools/schema";
+
+import {
+  createServer,
+  createPubSub,
+  YogaInitialContext,
+} from "@graphql-yoga/node";
 
 import { typeDefs } from "./schemas";
 import { resolvers } from "./resolvers";
 
-export interface Server extends YogaInitialContext {}
+const pubsub = createPubSub<{
+  randomNumber: [randomNumber: string];
+  randomNumber2: [randomNumber2: string];
+}>();
+
+export interface Server extends YogaInitialContext {
+  pubsub: typeof pubsub;
+}
 
 const schema = makeExecutableSchema({
   typeDefs,
@@ -12,7 +24,10 @@ const schema = makeExecutableSchema({
 });
 
 const context = (ctx: Server) => {
-  return ctx;
+  return {
+    ...ctx,
+    pubsub,
+  };
 };
 
 export const startServer = async () => {

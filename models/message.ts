@@ -10,12 +10,18 @@ const messageSchema = new Schema<IMessage>({
     type: Date,
     default: new Date(),
   },
+  chat: {
+    type: Schema.Types.ObjectId,
+    required: true,
+    ref: "Chat",
+  },
   sender: [
     {
       type: Schema.Types.ObjectId,
+      required: true,
       ref: "User",
     },
   ],
 });
 
-export const Message = model("Message", messageSchema);
+export const Message = model<IMessage>("Message", messageSchema);

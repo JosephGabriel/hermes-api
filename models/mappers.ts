@@ -9,9 +9,7 @@ export interface UserMapper {
 
 export interface ChatMapper {
   _id: string;
-  title: string;
-  image: string;
-  participants: string[];
+  participants: UserMapper[];
   messages: MessageMapper[];
   createdAt: Date;
 }

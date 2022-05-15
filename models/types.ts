@@ -2,7 +2,6 @@ export interface User {
   name: string;
   phone: string;
   image: string;
-  password: string;
   chats: Chat[];
 }
 
@@ -16,6 +15,7 @@ export interface Chat {
 
 export interface Message {
   sender: User;
+  chat: Chat;
   text: string;
   createdAt: Date;
 }
