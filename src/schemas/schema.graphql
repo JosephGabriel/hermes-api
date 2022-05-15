@@ -1,7 +1,7 @@
 type Query {
-  hello: String
   users: [User!]
   chats: [Chat!]
+  messages: [Message!]
 }
 
 type Mutation {
@@ -9,6 +9,10 @@ type Mutation {
   createUser(data: CreateUserInput): User!
   createMessage(data: CreateMessageInput): Message!
 }
+
+# type Subscription {
+
+# }
 
 type Chat {
   id: ID!

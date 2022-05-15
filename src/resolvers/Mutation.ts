@@ -25,11 +25,17 @@ export const Mutation: MutationResolvers = {
     return user;
   },
 
-  async createMessage(parent, { data }) {
+  async createMessage(parent, { data }, { pubsub }) {
     const user = await User.findById(data.sender);
 
     if (!user) {
       throw new GraphQLYogaError("Usuário inválido");
+    }
+
+    const chat = await Chat.findById(data.chat);
+
+    if (!chat) {
+      throw new GraphQLYogaError("Chat inválido");
     }
 
     const message = await Message.create({

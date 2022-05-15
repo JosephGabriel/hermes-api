@@ -72,7 +72,7 @@ export type MutationCreateUserArgs = {
 export type Query = {
   __typename?: 'Query';
   chats?: Maybe<Array<Chat>>;
-  hello?: Maybe<Scalars['String']>;
+  messages?: Maybe<Array<Message>>;
   users?: Maybe<Array<User>>;
 };
 
@@ -206,7 +206,7 @@ export type MutationResolvers<ContextType = Server, ParentType extends Resolvers
 
 export type QueryResolvers<ContextType = Server, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
   chats?: Resolver<Maybe<Array<ResolversTypes['Chat']>>, ParentType, ContextType>;
-  hello?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  messages?: Resolver<Maybe<Array<ResolversTypes['Message']>>, ParentType, ContextType>;
   users?: Resolver<Maybe<Array<ResolversTypes['User']>>, ParentType, ContextType>;
 };
 

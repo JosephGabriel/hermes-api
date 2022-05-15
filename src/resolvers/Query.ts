@@ -1,4 +1,5 @@
 import { Chat } from "../../models/chat";
+import { Message } from "../../models/message";
 import { User } from "../../models/user";
 import { QueryResolvers } from "../generated/schema";
 
@@ -13,5 +14,11 @@ export const Query: QueryResolvers = {
     const chats = await Chat.find();
 
     return chats;
+  },
+
+  async messages() {
+    const messages = await Message.find();
+
+    return messages;
   },
 };
